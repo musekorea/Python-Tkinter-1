@@ -12,16 +12,27 @@ win.resizable(True, True) #사이즈 변경
 
 # Label1
 label1 = tkinter.Label(win, width=30, height=2)
-label1.config(text="회차를 입력하세요 예) 2022014")
+label1.config(text="회차를 입력하세요")
 label1.pack()
+
+def handle_clear(e):
+  input.delete(0, tkinter.END)
+
+def handle_enter(e):
+  btn_click()
 
 # Entry 
 input = tkinter.Entry(win, width=30)
 input.pack()
+input.insert(0,"예 : 2022014")
+input.bind("<Button-1>",handle_clear)
+input.bind("<Return>", handle_enter)
+
 lotto_list = []
 
 def btn_click():
   input_value = input.get()
+  input.bind()
   req = requests.get(f"https://www.cjcp.com.cn/kaijiang/ssq/index.php?qh={input_value}")
   soup = BeautifulSoup(req.text, "html.parser")
   lotto_red = soup.find_all("span", {"class","qiu_red"})
