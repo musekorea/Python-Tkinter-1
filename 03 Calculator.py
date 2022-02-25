@@ -5,7 +5,7 @@ win = tkinter.Tk() #창 생성
 win.title("First GUI") #창 타이틀
 win.geometry("268x275+1360+100") # 창 크기 
 win.option_add("*Font", "맑은고딕 15") #전체 폰트 
-win.configure(bg="cornflowerblue") #배경 색깔 
+win.config(bg="cornflowerblue") #배경 색깔 
 win.resizable(True, True) #사이즈 변경 
 
 # Entry
