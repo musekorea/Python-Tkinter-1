@@ -1,7 +1,6 @@
-from cgi import test
-from functools import partial
 import tkinter
 import random
+import datetime
 
 win = tkinter.Tk()
 win.title("Aim Game")
@@ -41,19 +40,21 @@ input.bind("<Button-1>", handle_clear)
 
 counter = 1
 
+
 def handle_btn_click():
   btn.destroy()
   global counter 
   global target_number
   counter+=1
-  print(counter)
-  if target_number<counter:
-    print("끝")
+  if target_number<counter: #게임종료
+    end_time = datetime.datetime.now()
+    record = end_time-start_time
+    end_label = tkinter.Label()
+    end_label.config(text=f"CLEAR TIME : {record.total_seconds()} sec")
+    end_label.pack(pady=250)
     return
   else:
     make_btn()
-    print("새로운 버튼 생성")
-  
 
 def make_btn():
   global btn
@@ -64,6 +65,8 @@ def make_btn():
 
 def handle_start_click():
   global target_number
+  global start_time
+  start_time = datetime.datetime.now()
   try:
     target_number =  int( input.get())
     for widget in win.grid_slaves():
